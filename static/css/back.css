@@ -1,0 +1,49 @@
+:root {
+  --u: 1vmax; /* change cube size */
+  --hue: hue-rotate(0deg); /* change color hue*/
+  --dark: #6a587f;
+  --normal: #a98ec3;
+  --light: #d6c3ea;
+  --grad1: repeating-conic-gradient(
+      from -56.7deg at 50% 16.5%,
+      var(--light) 0% 31.5%,
+      #fff0 0% 50%,
+      #fff0 0% 100%
+    )
+    50% / calc(var(--u) * 10) calc(var(--u) * 20);
+  --grad2: repeating-conic-gradient(
+      from -90deg at 50% 50%,
+      var(--light) 0% 9.25%,
+      var(--dark) 0% 25.05%,
+      var(--normal) 0% 40.75%,
+      var(--light) 0% 50%,
+      #fff0 0% 100%
+    )
+    50% / calc(var(--u) * 10) calc(var(--u) * 20.05);
+  --pos: calc(var(--u) * -5) calc(var(--u) * 10);
+}
+
+html {
+  height: 80vh;
+  filter: var(--hue);
+  background: var(--grad1), var(--grad2), var(--grad1), var(--grad2),
+    var(--light);
+  background-position: 0 0, 0 0, var(--pos), var(--pos);
+}
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+.stroke-text{
+  color:white;
+  text-shadow:2px 0 0 black,0 2px 0 black, 1px 0 0 black,0 1px 0 black;
+}

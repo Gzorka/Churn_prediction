@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/back.css" />
+    <meta charset="UTF-8">
+    <title>Отток клиентов</title>
+</head>
+<body>
+    <span class="stroke-text"><strong><font size="12" color="white" >Введите данные клиента </FONT></strong></span>
+    <form action="/predict" method="post">
+        <span class="stroke-text"><font size="5"> Пол клиента (1- жен, 0 - муж) </font></span><br>
+        <input size="50" type="number" name="sex"><br><br>
+
+       <span class="stroke-text"><font size="5">Возраст клиента: </font></span><br>
+        <input type="number" name="age"><br><br>
+
+       <span class="stroke-text"><font size="5">Количество покупок: </font></span><br>
+        <input size="26" type="text" name="num_purchases"><br><br>
+
+       <span class="stroke-text"><font size="5">Количество звонков в ТехПоддержку: </font></span><br>
+        <input size="50" type="text" name="calls"><br><br>
+
+        <input type="submit" value="Предсказать">
+    </form>
+</body>
+</html>
+
