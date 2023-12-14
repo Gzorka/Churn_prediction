@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -14,22 +15,31 @@ def home():
 def predict():
     if request.method == 'POST':
         age = float(request.form['age'])
-        sex = float(request.form['sex'])
+        income = float(request.form['income'])
         num_purchases = float(request.form['num_purchases'])
         calls = float(request.form['calls'])
 
         df = pd.read_csv("data.csv")
 
-        X = df[['Age', 'Sex', 'NumPurchases', 'Calls']]
+        X = df[['Age', 'Income', 'NumPurchases', 'Calls']]
         y = df['Churn']
 
-        X_train, _, y_train, _ = train_test_split(X, y, test_size=0.2, random_state=43)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=43)
 
         model = LogisticRegression()
         model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
 
-        new_data = [[age, sex, num_purchases, calls]]
-        new_df = pd.DataFrame(new_data, columns=['Age', 'Sex', 'NumPurchases', 'Calls'])
+        accuracy = accuracy_score(y_test, y_pred)
+        conf_matrix = confusion_matrix(y_test, y_pred)
+        classification_rep = classification_report(y_test, y_pred, zero_division=1)
+
+        print(f"Accuracy: {accuracy}")
+        print(f"Confusion Matrix:\n{conf_matrix}")
+        print(f"Classification Report:\n{classification_rep}")
+
+        new_data = [[age, income, num_purchases, calls]]
+        new_df = pd.DataFrame(new_data, columns=['Age', 'Income', 'NumPurchases', 'Calls'])
 
         prediction = model.predict(new_df)
 
